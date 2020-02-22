@@ -1,13 +1,20 @@
 using Xunit;
 
 public class TestRunner{
+
     [Fact]
-    public void Test1(){
-        Assert.Equal(4,Add(2,2));
+    public void setup(){
+
     }
 
     [Fact]
-    public void Test2(){
+    public void testCauldron(){
+        Cauldron cauldron = new TestCauldron(4);
+        Assert.Equal(4,cauldron.getNumber());
+    }
+
+    [Fact]
+    public void testCauldronMix(){
         Assert.Equal(5,Add(2,2));
     }
 

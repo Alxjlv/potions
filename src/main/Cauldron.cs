@@ -1,3 +1,4 @@
+using System;
 public abstract class Cauldron
 {
     protected int numberOfIngredients {get;set;}
@@ -6,6 +7,7 @@ public abstract class Cauldron
     public abstract int getNumber();
 
     public Cauldron mix(Ingredient[] ingredients){
+        throw new NotImplementedException();
         if(ingredients.Length>numberOfIngredients){
             
         }
