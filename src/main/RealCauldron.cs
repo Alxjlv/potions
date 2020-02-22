@@ -7,4 +7,8 @@ public class RealCauldron : Cauldron
     public int getIngredientLimit(){
         return numberOfIngredients;
     }
+
+    public override int getNumber(){
+        return numberOfIngredients;
+    }
 }

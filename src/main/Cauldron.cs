@@ -6,9 +6,10 @@ public abstract class Cauldron
     public abstract int getNumber();
 
     public Cauldron mix(Ingredient[] ingredients){
-        if(ingredients.Length()>numberOfIngredients){
-
+        if(ingredients.Length>numberOfIngredients){
+            
         }
+        return this;
     }
 
 
