@@ -1,28 +1,56 @@
 using System;
 using System.Collections.Generic;
-public class IngredientFactory{
-    private Dictionary<string, Ingredient> ingredientStore = new Dictionary<string, Ingredient>();
+using System.Collections.ObjectModel;
 
-    private static IngredientFactory instance;
+public class IngredientFactory{ //Singleton might not be the best idea tbh - make nonstatic, and use dependancy injection for the ingredients array?
+/*
+For example:
+public IngredientFactory(ReadOnlyDictionary<string,Ingredient>){...}
+
+*/
+	public static ReadOnlyDictionary<string,Ingredient> _readOnlyIngredientStore;
+	static IngredientFactory(){ //static constructor to initialise the ingredients
+		IDictionary<string, Ingredient> ingredientStore = new Dictionary<string, Ingredient>(){
+			{"Nightshade",new Ingredient("Nightshade","Hallucinogenic")},
+			{"Hummus",new Ingredient("Hummus","Thickener","Can be applied as a paste")},
+			{"Willowbark", new Ingredient("Willowbark","Painkiller")},
+			{"Charcoal", new Ingredient("Charcoal", "Poison cure")},
+			{"Snake Venom", new Ingredient("Snake Venom", "Poisonous")},
+			{"Honey",new Ingredient("Honey", "Antibiotic")}
+		};
+		_readOnlyIngredientStore = new ReadOnlyDictionary<string, Ingredient>(ingredientStore);
+	}
+	
+	private static IngredientFactory _instance;
 
     public static IngredientFactory getInstance(){ //TODO - make constructor thread safe
-        if(instance == null){
-            instance = new IngredientFactory();
+        if(_instance == null){
+            _instance = new IngredientFactory();
         }
-        return instance;
+        return _instance;
     }
 
     private IngredientFactory(){
-        ingredientStore.Add("Nightshade",new Ingredient("Nightshade","Hallucinogenic"));
     }
+	
+	public Ingredient get(string ingredient){ //gets a single ingredient
+		if(_readOnlyIngredientStore.ContainsKey(ingredient)){
+			Ingredient output;
+			_readOnlyIngredientStore.TryGetValue(ingredient, out output);
+			return output;
+		}else{
+			throw new IngredientNotFoundException("Ingredient "+ingredient+" not found");
+		}
+	}
 
-    public Ingredient get(string ingredient){
-        if(ingredientStore.ContainsKey(ingredient)){
-            Ingredient output;
-            ingredientStore.TryGetValue(ingredient, out output);
-            return output;
-        }else{
-            throw new IngredientNotFoundException("Ingredient "+ingredient+" not found");
+	public string[] getAllKeys(){//get the strings of the keys
+		string[] keys = new string[_readOnlyIngredientStore.Count];
+        int increment = 0;
+        foreach(string key in _readOnlyIngredientStore.Keys){
+            keys[increment] = key;
+            increment++;
         }
-    }
+        return keys;
+	}
+
 }

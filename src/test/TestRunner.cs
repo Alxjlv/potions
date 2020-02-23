@@ -26,4 +26,11 @@ public class TestRunner{
         }
     }
 
+    [Fact]
+    public void testGetAllKeys(){ //how to test the case where there are no keys in the array? Dependancy Injection?
+        IngredientFactory factory = IngredientFactory.getInstance();
+        string[] keys = factory.getAllKeys();
+
+    }
+
 }
