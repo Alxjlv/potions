@@ -3,22 +3,27 @@ using Xunit;
 public class TestRunner{
 
     [Fact]
-    public void setup(){
-
-    }
-
-    [Fact]
     public void testCauldron(){
         Cauldron cauldron = new TestCauldron(4);
-        Assert.Equal(4,cauldron.getNumber());
+        Assert.Equal(4,cauldron.getIngredientLimit());
     }
 
     [Fact]
-    public void testCauldronMix(){
-        Assert.Equal(5,Add(2,2));
+    public void testIngredientWhichExists(){
+        IngredientFactory factory = IngredientFactory.getInstance();
+        Ingredient ingredient = factory.get("Nightshade");
+        Assert.Equal("Name: Nightshade | Property: Hallucinogenic",ingredient.printAttributes());
     }
 
-    int Add(int x, int y){
-        return x + y;
+    [Fact]
+    public void testIngredientNotFound(){
+        IngredientFactory factory = IngredientFactory.getInstance();
+        try{
+            factory.get("FakeIngredient");
+            Assert.True(false,"Exception should have been thrown when the ingredient does not exist");
+        }catch(IngredientNotFoundException I){
+            Assert.Equal("Ingredient FakeIngredient not found",I.Message);
+        }
     }
+
 }

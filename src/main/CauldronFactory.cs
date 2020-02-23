@@ -4,6 +4,10 @@ public static class CauldronFactory{
         return new RealCauldron(10);
     }
 
+    public static Cauldron buildMedCauldron(){
+        return new RealCauldron(5);
+    }
+
     public static Cauldron buildSmallCauldron(){
         return new RealCauldron(3);
     }

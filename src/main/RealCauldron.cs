@@ -1,14 +1,11 @@
 public class RealCauldron : Cauldron
 {
-    public RealCauldron(int ingredientNum){
-        numberOfIngredients = ingredientNum;
+    public RealCauldron(int cauldronSize){
+        ingredientLimit = cauldronSize;
     }
 
-    public int getIngredientLimit(){
-        return numberOfIngredients;
+    public override int getIngredientLimit(){
+        return ingredientLimit;
     }
 
-    public override int getNumber(){
-        return numberOfIngredients;
-    }
 }

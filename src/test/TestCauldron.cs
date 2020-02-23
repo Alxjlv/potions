@@ -1,11 +1,11 @@
 public class TestCauldron : Cauldron {
     
-    public TestCauldron(int ingredientsNum){
-        numberOfIngredients = ingredientsNum;
+    public TestCauldron(int cauldronSize){
+        ingredientLimit = cauldronSize;
     }
 
-    public override int getNumber(){
-        return numberOfIngredients;
+    public override int getIngredientLimit(){
+        return ingredientLimit;
     }
 
 }
