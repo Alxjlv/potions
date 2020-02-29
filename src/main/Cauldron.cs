@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
-public abstract class Cauldron
+public class Cauldron
 {
-    protected int ingredientLimit {get;set;}
-    protected Potion potion;
-    protected List<Ingredient> ingredients = new List<Ingredient>();
+    private int ingredientLimit;
+    private Potion potion;
+    private List<Ingredient> ingredients = new List<Ingredient>();
 
-    public Cauldron(int cauldronSize){
+    public Cauldron(int cauldronSize,IngredientStore ingredients){
         ingredientLimit = cauldronSize;
     }
 
-    public abstract int getIngredientLimit();
+    public int getIngredientLimit(){
+        return ingredientLimit;
+    }
 
     public Cauldron mix(){
         throw new NotImplementedException();

@@ -17,6 +17,7 @@ class PotionRunner
                 Console.WriteLine("Goodbye");
                 break;
             }else if(result.ToLower().Equals("c")){
+                //Main logic
                 System.Console.WriteLine("Great!");
                 int exitCode = makeCauldron();
                 if(exitCode == 1){
@@ -43,13 +44,13 @@ class PotionRunner
             Console.WriteLine("Quit: [q]");
             result = Console.ReadLine();
             if(result.Equals("1")){
-                concrete = CauldronFactory.buildBigCauldron();
+                concrete = new Cauldron(10,new IngredientStore(StaticData.ingredients));
                 return 0;
             }else if(result.Equals("2")){
-                concrete = CauldronFactory.buildMedCauldron();
+                concrete = new Cauldron(5,new IngredientStore(StaticData.ingredients));
                 return 0;
             }else if(result.Equals("3")){
-                concrete = CauldronFactory.buildSmallCauldron();
+                concrete = new Cauldron(3,new IngredientStore(StaticData.ingredients));
                 return 0;
             }else if(result.ToLower().Equals("q")){
                 Console.WriteLine("Goodbye");

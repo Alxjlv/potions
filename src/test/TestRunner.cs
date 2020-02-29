@@ -18,7 +18,7 @@ public class TestRunner{
 
     [Fact]
     public void testCauldron(){
-        Cauldron cauldron = new TestCauldron(4);
+        Cauldron cauldron = new Cauldron(4, new IngredientStore(_testIngredients));
         Assert.Equal(4,cauldron.getIngredientLimit());
     }
 
