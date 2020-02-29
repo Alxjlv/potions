@@ -41,10 +41,22 @@ public class TestRunner{
     }
 
     [Fact]
-    public void testGetAllKeys(){ //how to test the case where there are no keys in the array? Dependancy Injection?
+    public void testGetAllKeys(){
         IngredientStore testStore = new IngredientStore(_testIngredients);
-        string[] keys = testStore.getAllKeys();
+        //Expected in alphabetical order
+        string[] keys = {"Charcoal","Honey","Hummus","Nightshade","Snake Venom","Willowbark"};
+        Assert.Equal(keys,testStore.getAllKeys());
+    }
 
+    [Fact]
+    public void testNoKeys(){
+        IngredientStore emptyStore = new IngredientStore(new ReadOnlyDictionary<string, Ingredient>(new Dictionary<string,Ingredient>()));
+        try{
+            string[] keys = emptyStore.getAllKeys();
+            Assert.True(false,"Exception should have been thrown when there are no ingredients");
+        }catch(NoIngredientsException N){
+            Assert.Equal("No Ingredients exist", N.Message);
+        }
     }
 
 }

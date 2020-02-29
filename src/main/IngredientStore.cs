@@ -42,6 +42,7 @@ public IngredientFactory(ReadOnlyDictionary<string,Ingredient>){...}
             keys[increment] = key;
             increment++;
         }
+		Array.Sort(keys);
         return keys;
 	}
 
