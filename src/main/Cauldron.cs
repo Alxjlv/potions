@@ -6,6 +6,10 @@ public abstract class Cauldron
     protected Potion potion;
     protected List<Ingredient> ingredients = new List<Ingredient>();
 
+    public Cauldron(int cauldronSize){
+        ingredientLimit = cauldronSize;
+    }
+
     public abstract int getIngredientLimit();
 
     public Cauldron mix(){

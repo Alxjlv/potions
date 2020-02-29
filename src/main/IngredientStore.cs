@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-public class IngredientFactory{ //Singleton might not be the best idea tbh - make nonstatic, and use dependancy injection for the ingredients array?
+public class IngredientStore { //Singleton might not be the best idea tbh - make nonstatic, and use dependancy injection for the ingredients array?
 /*
 For example:
 public IngredientFactory(ReadOnlyDictionary<string,Ingredient>){...}
 
 */
 	public static ReadOnlyDictionary<string,Ingredient> _readOnlyIngredientStore;
-	static IngredientFactory(){ //static constructor to initialise the ingredients
+	static IngredientStore(){ //static constructor to initialise the ingredients
 		IDictionary<string, Ingredient> ingredientStore = new Dictionary<string, Ingredient>(){
 			{"Nightshade",new Ingredient("Nightshade","Hallucinogenic")},
 			{"Hummus",new Ingredient("Hummus","Thickener","Can be applied as a paste")},
@@ -20,17 +20,9 @@ public IngredientFactory(ReadOnlyDictionary<string,Ingredient>){...}
 		};
 		_readOnlyIngredientStore = new ReadOnlyDictionary<string, Ingredient>(ingredientStore);
 	}
-	
-	private static IngredientFactory _instance;
 
-    public static IngredientFactory getInstance(){ //TODO - make constructor thread safe
-        if(_instance == null){
-            _instance = new IngredientFactory();
-        }
-        return _instance;
-    }
-
-    private IngredientFactory(){
+    public IngredientStore(ReadOnlyDictionary<string, Ingredient> ingredientList){
+		_readOnlyIngredientStore = ingredientList;
     }
 	
 	public Ingredient get(string ingredient){ //gets a single ingredient
